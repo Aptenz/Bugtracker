@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
 using BugTracker.Data;
 using BugTracker.Models;
 
@@ -19,6 +21,7 @@ namespace BugTracker.Controllers
             _context = context;
         }
 
+        [Authorize]
         // GET: Projects
         public async Task<IActionResult> Index()
         {
@@ -26,6 +29,7 @@ namespace BugTracker.Controllers
             return View(await applicationDbContext.ToListAsync());
         }
 
+        [Authorize]
         // GET: Projects/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -45,6 +49,7 @@ namespace BugTracker.Controllers
             return View(project);
         }
 
+        [Authorize]
         // GET: Projects/Create
         public IActionResult Create()
         {
@@ -69,6 +74,7 @@ namespace BugTracker.Controllers
             return View(project);
         }
 
+        [Authorize]
         // GET: Projects/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -122,6 +128,7 @@ namespace BugTracker.Controllers
             return View(project);
         }
 
+        [Authorize]
         // GET: Projects/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
