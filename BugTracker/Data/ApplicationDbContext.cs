@@ -10,5 +10,7 @@ namespace BugTracker.Data
             : base(options)
         {
         }
+        public virtual DbSet<Project> Projects { get; set; } = default!;
+        public virtual DbSet<Ticket> Tickets { get; set; } = default!;
     }
 }
