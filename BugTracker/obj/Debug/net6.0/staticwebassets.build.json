@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "WcxJhPr19cFZ7EmFNcOnh+JyuVS8cF/fzEfD6yUx8zI=",
+  "Hash": "kmTGVdGJak9sbSXy7PwbstFvV6cYcQZGB9YtgjFaIgw=",
   "Source": "BugTracker",
   "BasePath": "_content/BugTracker",
   "Mode": "Default",
@@ -1103,6 +1103,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.ico"
+    },
+    {
+      "Identity": "C:\\Users\\Nick\\Documents\\code\\BugTracker\\BugTracker\\wwwroot\\img\\Logo.png",
+      "SourceId": "BugTracker",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Nick\\Documents\\code\\BugTracker\\BugTracker\\wwwroot\\",
+      "BasePath": "_content/BugTracker",
+      "RelativePath": "img/Logo.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\img\\Logo.png"
     },
     {
       "Identity": "C:\\Users\\Nick\\Documents\\code\\BugTracker\\BugTracker\\wwwroot\\js\\site.js",
