@@ -9,16 +9,19 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authorization;
 using BugTracker.Data;
 using BugTracker.Models;
+using System.Net.Http.Headers;
 
 namespace BugTracker.Controllers
 {
     public class ProjectsController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<AppUser> _userManager;
 
-        public ProjectsController(ApplicationDbContext context)
+        public ProjectsController(ApplicationDbContext context, UserManager<AppUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         [Authorize]
@@ -51,10 +54,12 @@ namespace BugTracker.Controllers
 
         [Authorize]
         // GET: Projects/Create
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            ViewData["AppUserID"] = new SelectList(_context.Users, "Id", "Id");
-            return View();
+            Project project = new Project();
+            project.AppUserID = _userManager.GetUserId(User);
+
+            return PartialView("_ProjectPartialView", project);
         }
 
         // POST: Projects/Create
@@ -62,15 +67,27 @@ namespace BugTracker.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Description,StartDate,EndDate,AppUserID")] Project project)
+        public async Task<IActionResult> Create([Bind("Id,Name,Description,StartDate,EndDate")] Project project)
         {
+            ModelState.Remove("AppUserID"); // don't want user to modify their userid
+
             if (ModelState.IsValid)
             {
+                project.AppUserID = _userManager.GetUserId(User);
+                if (project.StartDate != null)
+                {
+                    project.StartDate = DateTime.SpecifyKind(project.StartDate.Value, DateTimeKind.Utc);
+                }
+
+                if (project.EndDate != null)
+                {
+                    project.EndDate = DateTime.SpecifyKind(project.EndDate.Value, DateTimeKind.Utc);
+                }
                 _context.Add(project);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["AppUserID"] = new SelectList(_context.Users, "Id", "Id", project.AppUserID);
+            
             return View(project);
         }
 
