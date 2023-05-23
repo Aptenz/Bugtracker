@@ -1,6 +1,7 @@
 ﻿using BugTracker.Data;
 using BugTracker.Models;
 using BugTracker.Services.Interfaces;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace BugTracker.Services
@@ -8,13 +9,15 @@ namespace BugTracker.Services
     public class ProjectService : IProjectService
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<AppUser> _userManager;
 
-        public ProjectService(ApplicationDbContext context)
+        public ProjectService(ApplicationDbContext context, UserManager<AppUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
-        public Task AddUserToProjectAsync(int AppUserID, int ProjectID)
+        public async Task AddUserToProjectAsync(int AppUserID, int ProjectID)
         {
             throw new NotImplementedException();
         }

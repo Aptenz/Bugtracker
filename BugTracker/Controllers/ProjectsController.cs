@@ -28,8 +28,12 @@ namespace BugTracker.Controllers
         // GET: Projects
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Projects.Include(p => p.AppUser);
-            return View(await applicationDbContext.ToListAsync());
+            string appUserId = _userManager.GetUserId(User);
+            var projects = await _context.Projects
+                                     .Where(c => c.AppUserID == appUserId)
+                                     .Include(c => c.AppUsers)
+                                     .ToListAsync();
+            return View(projects);
         }
 
         [Authorize]
@@ -42,7 +46,7 @@ namespace BugTracker.Controllers
             }
 
             var project = await _context.Projects
-                .Include(p => p.AppUser)
+                .Include(p => p.AppUsers)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (project == null)
             {
@@ -155,7 +159,7 @@ namespace BugTracker.Controllers
             }
 
             var project = await _context.Projects
-                .Include(p => p.AppUser)
+                .Include(p => p.AppUsers)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (project == null)
             {

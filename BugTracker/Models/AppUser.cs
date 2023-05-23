@@ -19,5 +19,9 @@ namespace BugTracker.Models
 
         [NotMapped] // Won't be in the database, calculated at runtime
         public string? FullName { get { return $"{FirstName} {LastName}"; } }
+
+        public virtual ICollection<Project> Projects { get; set; } = new HashSet<Project>();
+        public virtual ICollection<Ticket> Tickets { get; set; } = new HashSet<Ticket>();
+
     }
 }

@@ -23,6 +23,6 @@ namespace BugTracker.Models
         [Required]
         public DateTime? DueDate { get; set; }
 
-        public virtual AppUser? AppUser { get; set; }
+        public virtual ICollection<AppUser> AppUsers { get; set; } = new HashSet<AppUser>();
     }
 }

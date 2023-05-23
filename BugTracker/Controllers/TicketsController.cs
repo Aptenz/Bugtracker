@@ -25,7 +25,7 @@ namespace BugTracker.Controllers
         // GET: Tickets
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Tickets.Include(t => t.AppUser);
+            var applicationDbContext = _context.Tickets.Include(t => t.AppUsers);
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -39,7 +39,7 @@ namespace BugTracker.Controllers
             }
 
             var ticket = await _context.Tickets
-                .Include(t => t.AppUser)
+                .Include(t => t.AppUsers)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (ticket == null)
             {
@@ -138,7 +138,7 @@ namespace BugTracker.Controllers
             }
 
             var ticket = await _context.Tickets
-                .Include(t => t.AppUser)
+                .Include(t => t.AppUsers)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (ticket == null)
             {

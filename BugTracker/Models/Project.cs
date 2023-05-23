@@ -21,7 +21,7 @@ namespace BugTracker.Models
 
 
         // virtuals
-        public virtual AppUser? AppUser { get; set; }
+        public virtual ICollection<AppUser> AppUsers { get; set; } = new HashSet<AppUser>();
         public virtual ICollection<Ticket> Tickets { get; set; } = new HashSet<Ticket>();
 
     }
