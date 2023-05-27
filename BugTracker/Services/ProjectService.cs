@@ -17,9 +17,27 @@ namespace BugTracker.Services
             _userManager = userManager;
         }
 
-        public async Task AddUserToProjectAsync(int AppUserID, int ProjectID)
+        public async Task AddUserToProjectAsync(string AppUserID, int ProjectID)
         {
-            throw new NotImplementedException();
+            try
+            {
+                //check to see if category is in contact already
+                if (!await IsUserInProject(AppUserID,ProjectID))
+                {
+                    var appUserId = await _userManager.FindByIdAsync(AppUserID);
+                    Project? project = await _context.Projects.FindAsync(ProjectID);
+
+                    if (project != null && appUserId != null) // check to see if no bad data can be passed
+                    {
+                        project.AppUsers.Add(appUserId);
+                        await _context.SaveChangesAsync();
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public Task<ICollection<int>> GetUserProjectIdsAsync(int AppUserID)
@@ -32,9 +50,14 @@ namespace BugTracker.Services
             throw new NotImplementedException();
         }
 
-        public Task<bool> IsUserInProject(int AppUserID, int ProjectID)
+        public async Task<bool> IsUserInProject(string AppUserID, int ProjectID)
         {
-            throw new NotImplementedException();
+            var appUserId = await _userManager.FindByIdAsync(AppUserID);
+
+            return await _context.Projects
+                                 .Include(c => c.AppUsers)
+                                 .Where(c => c.Id == ProjectID && c.AppUsers.Contains(appUserId))
+                                 .AnyAsync(); //returns true false statement
         }
 
         public Task RemoveUserFromProjectAsync(int AppUserID, int ProjectID)

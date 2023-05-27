@@ -5,8 +5,8 @@ namespace BugTracker.Services.Interfaces
 {
     public interface IProjectService
     {
-        Task AddUserToProjectAsync(int AppUserID, int ProjectID);
-        Task<bool> IsUserInProject(int AppUserID, int ProjectID);
+        Task AddUserToProjectAsync(string AppUserID, int ProjectID);
+        Task<bool> IsUserInProject(string AppUserID, int ProjectID);
         Task<IEnumerable<Project>> GetUserProjectsAsync(string UserID);
         Task<ICollection<int>> GetUserProjectIdsAsync(int AppUserID);
         Task RemoveUserFromProjectAsync(int AppUserID, int ProjectID);
