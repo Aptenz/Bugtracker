@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Authorization;
 using BugTracker.Data;
 using BugTracker.Models;
 using System.Net.Http.Headers;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace BugTracker.Controllers
 {
@@ -28,6 +29,10 @@ namespace BugTracker.Controllers
         // GET: Projects
         public async Task<IActionResult> Index()
         {
+            // list of all users
+            var allUsers = _userManager.Users.ToList();
+            ViewBag.AllUsers = allUsers;
+
             string appUserId = _userManager.GetUserId(User);
             var projects = await _context.Projects
                                      .Where(c => c.AppUserID == appUserId)
