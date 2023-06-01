@@ -11,6 +11,8 @@ using BugTracker.Data;
 using BugTracker.Models;
 using System.Net.Http.Headers;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using BugTracker.Services.Interfaces;
+using BugTracker.Services;
 
 namespace BugTracker.Controllers
 {
@@ -18,11 +20,15 @@ namespace BugTracker.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly UserManager<AppUser> _userManager;
+        private readonly IProjectService _projectService;
 
-        public ProjectsController(ApplicationDbContext context, UserManager<AppUser> userManager)
+        public ProjectsController(ApplicationDbContext context,
+                                  UserManager<AppUser> userManager,
+                                  IProjectService projectService)
         {
             _context = context;
             _userManager = userManager;
+            _projectService = projectService;
         }
 
         [Authorize]
@@ -76,7 +82,7 @@ namespace BugTracker.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Description,StartDate,EndDate")] Project project)
+        public async Task<IActionResult> Create([Bind("Id,Name,Description,StartDate,EndDate")] Project project, List<AppUser> AllUsers)
         {
             ModelState.Remove("AppUserID"); // don't want user to modify their userid
 
@@ -92,8 +98,16 @@ namespace BugTracker.Controllers
                 {
                     project.EndDate = DateTime.SpecifyKind(project.EndDate.Value, DateTimeKind.Utc);
                 }
+
+
                 _context.Add(project);
                 await _context.SaveChangesAsync();
+
+                foreach (var user in AllUsers)
+                {
+                    await _projectService.AddUserToProjectAsync(user.Id, project.Id);
+                }
+
                 return RedirectToAction(nameof(Index));
             }
             

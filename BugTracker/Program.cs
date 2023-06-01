@@ -1,5 +1,7 @@
 using BugTracker.Data;
 using BugTracker.Models;
+using BugTracker.Services.Interfaces;
+using BugTracker.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -16,6 +18,8 @@ builder.Services.AddDefaultIdentity<AppUser>(options => options.SignIn.RequireCo
     .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddScoped<IProjectService, ProjectService>();
 
 var app = builder.Build();
 
