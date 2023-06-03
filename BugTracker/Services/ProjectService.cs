@@ -45,11 +45,6 @@ namespace BugTracker.Services
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<Project>> GetUserProjectsAsync(string UserID)
-        {
-            throw new NotImplementedException();
-        }
-
         public async Task<bool> IsUserInProject(string AppUserID, int ProjectID)
         {
             var appUserId = await _userManager.FindByIdAsync(AppUserID);
@@ -68,6 +63,22 @@ namespace BugTracker.Services
         public IEnumerable<Project> SearchForProjects(string searchString, string AppUserID)
         {
             throw new NotImplementedException();
+        }
+
+        async Task<List<string>> IProjectService.GetUserIDsForProjectAsync(string projectId)
+        {
+            try
+            {
+                // Retrieve the appUserIDs associated with the project asynchronously
+                Project project = await _context.Projects.FindAsync(projectId);
+                List<string> appUserIDs = project.AppUsers.Select(u => u.Id).ToList();
+
+                return appUserIDs;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
     }
 }
