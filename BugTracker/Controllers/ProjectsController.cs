@@ -36,8 +36,8 @@ namespace BugTracker.Controllers
         public async Task<IActionResult> Index()
         {
             // list of all users
-            var allUsers = _userManager.Users.ToList();
-            ViewBag.AllUsers = allUsers;
+            var users = _userManager.Users.ToList();
+            ViewData["Users"] = users;
 
             string appUserId = _userManager.GetUserId(User);
             var projects = await _context.Projects
@@ -82,7 +82,7 @@ namespace BugTracker.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Description,StartDate,EndDate")] Project project, List<AppUser> AllUsers)
+        public async Task<IActionResult> Create([Bind("Id,Name,Description,StartDate,EndDate")] Project project, string[] Users)
         {
             ModelState.Remove("AppUserID"); // don't want user to modify their userid
 
@@ -103,9 +103,10 @@ namespace BugTracker.Controllers
                 _context.Add(project);
                 await _context.SaveChangesAsync();
 
-                foreach (var user in AllUsers)
+                // add users to project
+                foreach (var user in Users)
                 {
-                    await _projectService.AddUserToProjectAsync(user.Id, project.Id);
+                    await _projectService.AddUserToProjectAsync(user, project.Id);
                 }
 
                 return RedirectToAction(nameof(Index));
