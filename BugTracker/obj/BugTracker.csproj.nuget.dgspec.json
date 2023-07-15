@@ -1,20 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Nick\\Documents\\code\\BugTracker\\BugTracker\\BugTracker.csproj": {}
+    "C:\\Users\\Nick\\Documents\\code\\Bugtracker\\BugTracker\\BugTracker.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Nick\\Documents\\code\\BugTracker\\BugTracker\\BugTracker.csproj": {
+    "C:\\Users\\Nick\\Documents\\code\\Bugtracker\\BugTracker\\BugTracker.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Nick\\Documents\\code\\BugTracker\\BugTracker\\BugTracker.csproj",
+        "projectUniqueName": "C:\\Users\\Nick\\Documents\\code\\Bugtracker\\BugTracker\\BugTracker.csproj",
         "projectName": "BugTracker",
-        "projectPath": "C:\\Users\\Nick\\Documents\\code\\BugTracker\\BugTracker\\BugTracker.csproj",
+        "projectPath": "C:\\Users\\Nick\\Documents\\code\\Bugtracker\\BugTracker\\BugTracker.csproj",
         "packagesPath": "C:\\Users\\Nick\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Nick\\Documents\\code\\BugTracker\\BugTracker\\obj\\",
+        "outputPath": "C:\\Users\\Nick\\Documents\\code\\Bugtracker\\BugTracker\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Users\\Nick\\AppData\\Roaming\\Godot\\mono\\GodotNuGetFallbackFolder"
+        ],
         "configFilePaths": [
           "C:\\Users\\Nick\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Nick\\AppData\\Roaming\\NuGet\\config\\Godot.Offline.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -22,6 +26,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\sdk\\7.0.304\\Sdks\\Microsoft.NET.Sdk.Web\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -51,6 +56,10 @@
             "Microsoft.AspNetCore.Identity.UI": {
               "target": "Package",
               "version": "[6.0.15, )"
+            },
+            "Microsoft.EntityFrameworkCore.InMemory": {
+              "target": "Package",
+              "version": "[7.0.9, )"
             },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
@@ -94,7 +103,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.202\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.304\\RuntimeIdentifierGraph.json"
         }
       }
     }

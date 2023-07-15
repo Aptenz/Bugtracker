@@ -279,4 +279,10 @@ C:\Users\Nick\Documents\code\BugTracker\BugTracker\obj\Debug\net6.0\refint\BugTr
 C:\Users\Nick\Documents\code\BugTracker\BugTracker\obj\Debug\net6.0\BugTracker.pdb
 C:\Users\Nick\Documents\code\BugTracker\BugTracker\obj\Debug\net6.0\BugTracker.genruntimeconfig.cache
 C:\Users\Nick\Documents\code\BugTracker\BugTracker\obj\Debug\net6.0\ref\BugTracker.dll
-C:\Users\Nick\Documents\code\BugTracker\BugTracker\bin\Debug\net6.0\System.Diagnostics.DiagnosticSource.dll
+C:\Users\Nick\Documents\code\Bugtracker\BugTracker\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.InMemory.dll
+C:\Users\Nick\Documents\code\Bugtracker\BugTracker\bin\Debug\net6.0\Microsoft.Extensions.Caching.Abstractions.dll
+C:\Users\Nick\Documents\code\Bugtracker\BugTracker\bin\Debug\net6.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\Nick\Documents\code\Bugtracker\BugTracker\bin\Debug\net6.0\Microsoft.Extensions.Logging.dll
+C:\Users\Nick\Documents\code\Bugtracker\BugTracker\bin\Debug\net6.0\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\Nick\Documents\code\Bugtracker\BugTracker\bin\Debug\net6.0\Microsoft.Extensions.Options.dll
+C:\Users\Nick\Documents\code\Bugtracker\BugTracker\bin\Debug\net6.0\Microsoft.Extensions.Primitives.dll

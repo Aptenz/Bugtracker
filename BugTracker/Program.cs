@@ -9,9 +9,12 @@ var builder = WebApplication.CreateBuilder(args);
 // var connectionString = builder.Configuration.GetConnectionString("ApplicationDbContextConnection") ?? throw new InvalidOperationException("Connection string 'ApplicationDbContextConnection' not found.");
 
 // Add services to the container.
-var connectionString = builder.Configuration.GetSection("pgSettings")["pgConnection"];
+// var connectionString = builder.Configuration.GetSection("pgSettings")["pgConnection"];
+// builder.Services.AddDbContext<ApplicationDbContext>(options =>
+//    options.UseNpgsql(connectionString)); // configures database driver
+
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseNpgsql(connectionString)); // configures database driver
+    options.UseInMemoryDatabase("InMemoryDb")); // configures in-memory database
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddDefaultIdentity<AppUser>(options => options.SignIn.RequireConfirmedAccount = false)
